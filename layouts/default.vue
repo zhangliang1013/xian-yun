@@ -1,16 +1,52 @@
 <template>
   <div>
+    <Header></Header>
     <!-- 相当于router-view 组件映射到跟目录 -->
-    <nuxt> </nuxt>
+    <nuxt></nuxt>
+    <Footer></Footer>
   </div>
 </template>
 
 <script>
+// 引入公共组件
+import Header from "../components/header";
+import Footer from "../components/footer";
 export default {
-
-}
+  components: {
+    Header,
+    Footer
+  }
+};
 </script>
 
-<style>
+<style lang="less">
+html {
+  font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 16px;
+  word-spacing: 1px;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+}
 
+* {
+  margin: 0;
+  padding: 0;
+}
+ul,
+li,
+ol {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+em,
+i {
+  font-style: normal;
+}
 </style>
