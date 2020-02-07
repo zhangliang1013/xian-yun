@@ -2,37 +2,76 @@
   <div class="index">
     <!-- 轮播图部分 -->
     <el-carousel height="700px" class="carousel">
-      <el-carousel-item v-for='(item,index) in banners' :key="index">
-         <div
+      <el-carousel-item v-for="(item,index) in banners" :key="index">
+        <div
           class="banner"
           :style="`background:url(${$axios.defaults.baseURL + item.url}) center center no-repeat;`"
         ></div>
       </el-carousel-item>
     </el-carousel>
 
+    <!-- 搜索栏布局 -->
+    <div class="banner-content">
+      <div class="search-bar">
+        <!-- tab栏 -->
+        <el-row type="flex" class="search-tab">
+          <span v-for="(item,index) in options" :key="index"
+           @click="handleClick(index)"
+           :class="{'active': current === index}">
+            <i>{{item.title}}</i>
+          </span>
+        </el-row>
+
+        <!-- 输入框 -->
+        <el-row type="flex" align="middle" class="search-input">
+          <input :placeholder="options[current].placeholder" />
+          <i class="el-icon-search"></i>
+        </el-row>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-   data () {
-     return {
-        banners: [
-         "http://157.122.54.189:9095/assets/images/th01.jfif",
-         "http://157.122.54.189:9095/assets/images/th02.jfif"
+  data() {
+    return {
+      // 存轮播图照片路径
+      banners: [],
+      // 搜索框的数据
+      options: [
+        {
+          title: "攻略",
+          placeholder: "搜索城市"
+        },
+        {
+          title: "酒店",
+          placeholder: "请输入城市搜索酒店"
+        },
+        {
+          title: "机票",
+          placeholder: ""
+        }
       ],
-     }
-   },
-   mounted(){
-     this.$axios({
-        url: "/scenics/banners"
-     }).then( res => {
-         console.log(res)
-        const {data} = res.data;
-        this.banners = data
-     })
-   }
-}
+      // 存索引
+      current: 0
+    };
+  },
+  mounted() {
+    this.$axios({
+      url: "/scenics/banners"
+    }).then(res => {
+      console.log(res);
+      const { data } = res.data;
+      this.banners = data;
+    });
+  },
+  methods: {
+    handleClick(index) {
+      this.current = index;
+    }
+  }
+};
 </script>
 
 <style scoped lang="less">
