@@ -41,16 +41,22 @@ export default {
     loginClick() {
       this.$refs.form.validate(valid => {
         if (valid) {
-          this.$axios({
-            url: "/accounts/login",
-            method: "post",
-            data: this.form
-          }).then(res => {
-            const {data} = res;
-            console.log(data)
-            // this.$store.commit('user/getData',res.data)
-            this.$store.commit('user/getData', data);
-          });
+        //   this.$axios({
+        //     url: "/accounts/login",
+        //     method: "post",
+        //     data: this.form
+        //   }).then(res => {
+        //     const {data} = res;
+        //     console.log(data)
+        //     // this.$store.commit('user/getData',res.data)
+        //     this.$store.commit('user/getData', data);
+        //   });
+        this.$store.dispatch('user/login',this.form).then(res =>{
+            // 登录成功的提示
+           this.$message.success('登录成功！');
+        // 登录成功跳转到主页
+           this.$router.replace("/")
+        })
         } else {
           this.$message.error("温馨提示！登录出错了哦");
         }

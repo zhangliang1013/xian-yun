@@ -14,3 +14,20 @@ export const mutations = {
     // console.log(data)
     }
 }
+
+// 储存异步操作
+export const actions={
+    login({commit},data){
+      return  this.$axios({
+            url: "/accounts/login",
+            method: "post",
+            data
+          }).then(res => {
+            const {data} = res;
+            console.log(data)
+            // this.$store.commit('user/getData',res.data)
+            commit('getData', data);
+            return data
+          });
+    }
+}
