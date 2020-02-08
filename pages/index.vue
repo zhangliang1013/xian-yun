@@ -17,7 +17,7 @@
         <el-row type="flex" class="search-tab">
           <span v-for="(item,index) in options" :key="index"
            @click="handleClick(index)"
-           :class="{'active': current === index}">
+           :class="{active: current === index}">
             <i>{{item.title}}</i>
           </span>
         </el-row>
