@@ -46,7 +46,10 @@ export default {
             method: "post",
             data: this.form
           }).then(res => {
-            console.log(res);
+            const {data} = res;
+            console.log(data)
+            // this.$store.commit('user/getData',res.data)
+            this.$store.commit('user/getData', data);
           });
         } else {
           this.$message.error("温馨提示！登录出错了哦");

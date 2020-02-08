@@ -17,11 +17,11 @@
         <span>消息</span>
 
         <!-- 如果用户存在则展示用户信息，用户数据来自store -->
-        <el-dropdown v-if="false">
+        <el-dropdown v-if="$store.state.user.userInfo.token">
           <el-row type="flex" align="middle" class="el-dropdown-link">
             <nuxt-link to="#">
-              <img src="http://157.122.54.189:9093/images/pic_sea.jpeg" />
-              用户名
+              <img :src="$axios.defaults.baseURL + $store.state.user.userInfo.user.defaultAvatar" />
+              {{ $store.state.user.userInfo.user.nickname}}
             </nuxt-link>
             <i class="el-icon-caret-bottom el-icon--right"></i>
           </el-row>
@@ -35,14 +35,18 @@
           </el-dropdown-menu>
         </el-dropdown>
         <!-- 没登录状态展示的消息 -->
-        <nuxt-link to="/user/login">登录/注册</nuxt-link>
+        <nuxt-link to="/user/login" v-else>登录/注册</nuxt-link>
       </div>
     </el-row>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    handleLogout() {}
+  }
+};
 </script>
 
 <style lang='less' scoped>
@@ -92,6 +96,38 @@ export default {};
     span {
       margin-right: 30px;
     }
+  }
+}
+.el-dropdown-link {
+  margin-left: 20px;
+
+  &:hover {
+    img {
+      border-color: #409eff;
+    }
+  }
+
+  a {
+    display: block;
+  }
+
+  img {
+    width: 32px;
+    height: 32px;
+    vertical-align: middle;
+    border: 2px #fff solid;
+    border-radius: 50px;
+  }
+}
+
+.account-link {
+  font-size: 14px;
+  margin-left: 10px;
+  color: #666;
+
+  &:hover {
+    color: #409eff;
+    text-decoration: underline;
   }
 }
 </style>
