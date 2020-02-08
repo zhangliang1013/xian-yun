@@ -1,11 +1,11 @@
 <template>
   <el-form :model="form" ref="form" :rules="rules" class="form">
-<!-- 用户名 -->
+    <!-- 用户名 -->
     <el-form-item class="form-item" prop="username">
       <el-input v-model="form.username" placeholder="用户名/手机"></el-input>
     </el-form-item>
 
-<!-- 密码 -->
+    <!-- 密码 -->
     <el-form-item class="form-item" prop="password">
       <el-input v-model="form.password" placeholder="密码" type="password"></el-input>
     </el-form-item>
@@ -14,8 +14,8 @@
       <nuxt-link to="#">忘记密码</nuxt-link>
     </p>
 
-<!-- 登录按钮 -->
-    <el-button class="submit" type="primary">登录</el-button>
+    <!-- 登录按钮 -->
+    <el-button class="submit" type="primary" @click="loginClick">登录</el-button>
   </el-form>
 </template>
 
@@ -33,11 +33,26 @@ export default {
         username: [
           { required: true, message: "请输入用户名称", trigger: "blur" }
         ],
-        password: [
-          { required: true, message: "请输入密码", trigger: "blur" }
-        ]
+        password: [{ required: true, message: "请输入密码", trigger: "blur" }]
       }
     };
+  },
+  methods: {
+    loginClick() {
+      this.$refs.form.validate(valid => {
+        if (valid) {
+          this.$axios({
+            url: "/accounts/login",
+            method: "post",
+            data: this.form
+          }).then(res => {
+            console.log(res);
+          });
+        } else {
+          this.$message.error("温馨提示！登录出错了哦");
+        }
+      });
+    }
   }
 };
 </script>
