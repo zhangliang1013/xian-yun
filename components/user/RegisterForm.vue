@@ -86,7 +86,21 @@ export default {
   },
   methods: {
     //点击验证码
-    handleSendCaptcha() {},
+    handleSendCaptcha() {
+      // this.$axios({
+      //   url : '/captchas',
+      //   method : 'post',
+      //   data : {
+      //      tel: this.form.username
+      //   }
+      // }).then(res =>{
+      //   console.log(res)
+      // })
+      // vuex将一部操作封装起来
+      this.$store.dispatch('user/captchas',this.form.username).then( res =>{
+        this.$message.success('模拟验证码为  '  +   res.data.code);
+      })
+    },
     // 点击注册按钮
     handleRegSubmit() {}
   }

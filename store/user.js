@@ -54,5 +54,14 @@ export const actions={
           store.commit('getData', data);
           // return data
         });
+  },
+  captchas(store,data){
+   return this.$axios({
+      url : '/captchas',
+      method : 'post',
+      data : {
+         tel: data
+      }
+    })
   }
 }
