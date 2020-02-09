@@ -32,7 +32,7 @@ export default {
   },
   data () {
     return {
-      current : 1
+      current : 0
     }
   },
   methods : {
