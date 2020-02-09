@@ -49,6 +49,9 @@ export default {
         token : '',
         user : {}
       })
+      if(this.$store.state.user.userInfo.token == ''){
+        this.$message.warning('退出成功！')
+      }
     }
   }
 };
