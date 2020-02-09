@@ -44,7 +44,12 @@
 <script>
 export default {
   methods: {
-    handleLogout() {}
+    handleLogout() {
+      this.$store.commit('user/getData',{
+        token : '',
+        user : {}
+      })
+    }
   }
 };
 </script>

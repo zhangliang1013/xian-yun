@@ -51,11 +51,12 @@ export default {
         //     // this.$store.commit('user/getData',res.data)
         //     this.$store.commit('user/getData', data);
         //   });
-        this.$store.dispatch('user/login',this.form).then(res =>{
+        this.$store.dispatch('user/login',this.form).then(() =>{
             // 登录成功的提示
            this.$message.success('登录成功！');
         // 登录成功跳转到主页
-           this.$router.replace("/")
+         this.$router.push('/')
+          //  this.$router.replace("/")
         })
         } else {
           this.$message.error("温馨提示！登录出错了哦");
