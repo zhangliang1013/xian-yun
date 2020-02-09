@@ -102,7 +102,22 @@ export default {
       })
     },
     // 点击注册按钮
-    handleRegSubmit() {}
+    handleRegSubmit() {
+       this.$refs.form.validate((valid) => {
+          if (valid) {
+             const {checkPassword ,...data} = this.form
+             this.$axios({
+               url : '/accounts/register',
+               method : 'post',
+               data 
+             }).then(res =>{
+               console.log(res)
+             })
+          } else {
+           this.$message.error("温馨提示！注册出错了哦");
+          }
+        });
+    }
   }
 };
 </script>

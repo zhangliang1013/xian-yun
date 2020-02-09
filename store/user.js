@@ -42,6 +42,7 @@ export const mutations = {
 // }
 
 export const actions={
+  // 登录请求
   login(store,data){
     return  this.$axios({
           url: "/accounts/login",
@@ -55,6 +56,7 @@ export const actions={
           // return data
         });
   },
+  // 获取验证码请求
   captchas(store,data){
    return this.$axios({
       url : '/captchas',
