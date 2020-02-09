@@ -106,13 +106,18 @@ export default {
        this.$refs.form.validate((valid) => {
           if (valid) {
              const {checkPassword ,...data} = this.form
-             this.$axios({
-               url : '/accounts/register',
-               method : 'post',
-               data 
-             }).then(res =>{
-               console.log(res)
-             })
+            //  this.$axios({
+            //    url : '/accounts/register',
+            //    method : 'post',
+            //    data 
+            //  }).then(res =>{
+            //    console.log(res)
+            //    this.$store.commit('user/registerData',res.data)
+            //  })
+            this.$store.dispatch('user/register',data).then( ()=>{
+              this.$message.success('注册成功！');
+              this.$router.push('/')
+            })
           } else {
            this.$message.error("温馨提示！注册出错了哦");
           }
