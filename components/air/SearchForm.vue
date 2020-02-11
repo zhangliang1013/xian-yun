@@ -35,6 +35,7 @@
           :fetch-suggestions="queryDestSearch"
           placeholder="请搜索到达城市"
           @select="handleDestSelect"
+          @blur="handleDestCity"
           class="el-autocomplete"
         ></el-autocomplete>
       </el-form-item>
@@ -101,12 +102,6 @@ export default {
       if (value === "") {
         return;
       }
-      // callback([
-      //     {value: 1},
-      //     {value: 2},
-      //     {value: 3},
-      // ]);
-
       this.$axios({
         url: "/cities",
         params: {
@@ -144,14 +139,42 @@ export default {
     // 目标城市输入框获得焦点时触发
     // value 是选中的值，callback是回调函数，接收要展示的列表
     queryDestSearch(value, callback) {
-      callback([{ value: 1 }, { value: 2 }, { value: 3 }]);
+      if(!value){
+          return;
+      }
+
+      this.$axios({
+          url :'/cities',
+          params : {
+              name : value
+          }
+      }).then(res =>{
+          const {data} = res.data
+          const newData = data.map( v =>{
+              v.value = v.name.replace('市','');
+              return v;
+          })
+          this.destData = newData;
+          callback(newData)
+      })
     },
     // 目标城市下拉选择时触发
-    handleDestSelect(item) {},
-
+    handleDestSelect(item) {
+        this.form.destCity = item.value;
+        this.form.destCode = item.sort;
+    },
+    
+    // 到达城市失去焦点触发
+    handleDestCity(){
+      if(this.destData.length=== 0){
+          return;
+      }
+       this.form.destCity = this.destData[0].value;
+        this.form.destCode = this.destData[0].sort;
+    },
     // 确认选择日期时触发
     handleDate(value) {
-        this.form.departDate = moment(value).format("YYYY-MM--DD")
+        this.form.departDate = moment(value).format("YYYY-MM-DD")
     },
 
     // 触发和目标城市切换时触发
