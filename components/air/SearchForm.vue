@@ -178,7 +178,18 @@ export default {
     },
 
     // 触发和目标城市切换时触发
-    handleReverse() {},
+    handleReverse() {
+        const {departCity,departCode,destCity, destCode} = this.form
+
+        this.form.departCity = destCity;
+        this.form.departCode = destCode
+
+        this.form.destCity = departCity; 
+        this.form.destCode = departCode;
+
+        console.log(123)
+        console.log(this.form)
+    },
 
     // 提交表单是触发
     handleSubmit() {
