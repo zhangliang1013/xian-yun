@@ -108,7 +108,7 @@ export default {
           name: value
         }
       }).then(res => {
-        console.log(res)
+        // console.log(res)
         const { data } = res.data;
         const nameData = data.map(v => {
           v.value = v.name.replace("市", "");
@@ -193,7 +193,25 @@ export default {
 
     // 提交表单是触发
     handleSubmit() {
-        console.log(this.form)
+        // console.log(this.form)
+        if(this.form.departCity.trim().length === 0){
+            this.$message.error('出发城市不能为空！')
+            return;
+        }
+        if(this.form.destCity.trim().length === 0){
+            this.$message.error('到达城市不能为空！')
+            return;
+        }
+        if(this.form.departDate.trim().length === 0){
+            this.$message.error('出发日期不能为空！')
+            return;
+        }
+        
+        this.$message.success('机票搜索成功！')
+        this.$router.push({
+            path : '/air/search',
+            query : this.form
+        })
     }
   },
   mounted() {}
