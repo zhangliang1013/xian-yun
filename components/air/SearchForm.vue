@@ -42,7 +42,9 @@
       <!-- 出发时间 -->
       <el-form-item label="出发时间">
         <!-- change 用户确认选择日期时触发 -->
-        <el-date-picker type="date" placeholder="请选择日期" style="width: 100%;" @change="handleDate"></el-date-picker>
+        <el-date-picker type="date" placeholder="请选择日期"
+        v-model="form.departData"
+         style="width: 100%;" @change="handleDate"></el-date-picker>
       </el-form-item>
 
       <!-- 提交按钮 -->
@@ -59,6 +61,7 @@
 </template>
 
 <script>
+import moment from "moment";
 export default {
   data() {
     return {
@@ -147,7 +150,9 @@ export default {
     handleDestSelect(item) {},
 
     // 确认选择日期时触发
-    handleDate(value) {},
+    handleDate(value) {
+        this.form.departDate = moment(value).format("YYYY-MM--DD")
+    },
 
     // 触发和目标城市切换时触发
     handleReverse() {},
