@@ -13,7 +13,7 @@
                             <span>{{data.org_airport_name}} {{data.org_airport_quay}}</span>
                         </el-col>
                         <el-col :span="8" class="flight-time">
-                            <span>2时20分</span>
+                            <span>{{TimeSpan}}</span>
                         </el-col>
                         <el-col :span="8" class="flight-airport">
                             <strong>{{data.arr_time}}</strong>
@@ -55,13 +55,45 @@
 
 <script>
 export default {
-
+    data () {
+        return {
+            // 出发时间
+        startTime : 0,
+        // 到达时间
+        endTime : 0
+        }
+    },
     props: {
         // 数据
         data: {
             type: Object,
             // 默认是空数组
             default: {}
+        }
+    },
+    // 计算航班起飞至到达的时间差
+    computed: {
+        TimeSpan(){
+        //  console.log( this.data.dep_time.split(':'))
+        // 收集出发时间的数组
+        let start =  this.data.dep_time.split(':');
+        this.startTime = start[0] * 60 + Number(start[1]);
+
+        // 收集到达时间的数组
+        let end = this.data.arr_time.split(':');
+        this.endTime = end[0] * 60 + Number(end[1]);
+
+        if(this.endTime < this.startTime){
+            this.endTime += 24 * 60;
+        }
+         
+        // 中间的时间差
+        let TimeSpanNum = this.endTime - this.startTime;
+
+        const hour =  Math.floor(TimeSpanNum / 60);
+        const sec =   TimeSpanNum % 60;
+
+        return `${hour}时${sec}分`;
         }
     }
 }
