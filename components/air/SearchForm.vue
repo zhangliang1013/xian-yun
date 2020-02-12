@@ -258,7 +258,7 @@ export default {
         
         this.$message.success('机票搜索成功！')
         this.$router.push({
-            path : '/air/search',
+            path : '/air/flights',
             query : this.form
         })
     }
