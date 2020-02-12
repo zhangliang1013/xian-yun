@@ -95,14 +95,10 @@ export default {
         });
       }
     },
-
-    // 出发城市输入框获得焦点时触发
-    // value 是选中的值，callback是回调函数，接收要展示的列表
-    queryDepartSearch(value, callback) {
-      if (value === "") {
-        return;
-      }
-      this.$axios({
+    
+     //封装出发和到达城市value变化的函数
+    querySearch(value){
+     return    this.$axios({
         url: "/cities",
         params: {
           name: value
@@ -110,15 +106,39 @@ export default {
       }).then(res => {
         // console.log(res)
         const { data } = res.data;
-        const nameData = data.map(v => {
+        const newData = data.map(v => {
           v.value = v.name.replace("市", "");
           return v;
         });
-
-        this.departData = nameData;
-
-        callback(nameData);
-      });
+        return newData
+      })
+    },
+    // 出发城市输入框获得焦点时触发
+    // value 是选中的值，callback是回调函数，接收要展示的列表
+    queryDepartSearch(value, callback) {
+      if (value === "") {
+        callback([]);
+        return;
+      }
+  //  没封装之前的函数
+      // this.$axios({
+      //   url: "/cities",
+      //   params: {
+      //     name: value
+      //   }
+      // }).then(res => {
+      //   // console.log(res)
+      //   const { data } = res.data;
+      //   const nameData = data.map(v => {
+      //     v.value = v.name.replace("市", "");
+      //     return v;
+      //   });
+           
+       this.querySearch(value).then(newData => {
+         this.departData = newData;
+          callback(newData);
+       })
+      // });
     },
 
     // 出发城市下拉选择时触发
@@ -145,23 +165,29 @@ export default {
     // value 是选中的值，callback是回调函数，接收要展示的列表
     queryDestSearch(value, callback) {
       if(!value){
+        callback([]);
           return;
       }
+    //  没封装之前的函数
+      // this.$axios({
+      //     url :'/cities',
+      //     params : {
+      //         name : value
+      //     }
+      // }).then(res =>{
+      //     const {data} = res.data
+      //     const newData = data.map( v =>{
+      //         v.value = v.name.replace('市','');
+      //         return v;
+      //     })
+      //     this.destData = newData;
+      //     callback(newData)
+      // })
 
-      this.$axios({
-          url :'/cities',
-          params : {
-              name : value
-          }
-      }).then(res =>{
-          const {data} = res.data
-          const newData = data.map( v =>{
-              v.value = v.name.replace('市','');
-              return v;
-          })
-          this.destData = newData;
+      this.querySearch(value).then(newData =>{
+         this.destData = newData;
           callback(newData)
-      })
+      }) 
     },
     // 目标城市下拉选择时触发
     handleDestSelect(item) {
