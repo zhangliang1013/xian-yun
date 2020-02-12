@@ -45,7 +45,8 @@
         <!-- change 用户确认选择日期时触发 -->
         <el-date-picker type="date" placeholder="请选择日期"
         v-model="form.departData"
-         style="width: 100%;" @change="handleDate"></el-date-picker>
+         style="width: 100%;" @change="handleDate"
+           :picker-options="pickerOptions">></el-date-picker>
       </el-form-item>
 
       <!-- 提交按钮 -->
@@ -66,6 +67,12 @@ import moment from "moment";
 export default {
   data() {
     return {
+      // 控制日期选择
+       pickerOptions: {
+          disabledDate(time) {
+            return time.getTime() + 3600 * 1000 * 24 < Date.now();
+          }
+       },
       tabs: [
         { icon: "iconfont icondancheng", name: "单程" },
         { icon: "iconfont iconshuangxiang", name: "往返" }
