@@ -14,7 +14,8 @@
                 
                 
                 <!-- 航班信息 -->
-                 <FlightsLtem></FlightsLtem>
+                 <FlightsLtem v-for="(item,index) in flightsAmount.flights " :key='index'
+                 :data='item'></FlightsLtem>
             </div>
 
             <!-- 侧边栏 -->
@@ -36,8 +37,21 @@ export default {
   },
     data(){
         return {
-            
+          //  手机后台返回的总数据 
+          flightsAmount : {} 
         }
+    },
+    mounted(){
+      // 获取航班信息
+      this.$axios({
+        url : '/airs',
+        params : this.$route.query
+      }).then(res =>{
+        // console.log(res)
+        const {data} = res;
+        this.flightsAmount = data;
+        console.log(this.flightsAmount)
+      })
     }
 }
 </script>
