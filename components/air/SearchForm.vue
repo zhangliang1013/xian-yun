@@ -129,6 +129,11 @@ export default {
 
    //出发城市市区焦点是触发
    handleDepartCity(){
+
+     if(this.form.departCity === ''){
+       this.departData = [];
+     }
+
       if(this.departData.length === 0){
           return;
       }
@@ -166,6 +171,10 @@ export default {
     
     // 到达城市失去焦点触发
     handleDestCity(){
+     if(this.form.destCity === ''){
+       this.destData = []
+     }
+
       if(this.destData.length=== 0){
           return;
       }
