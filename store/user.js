@@ -29,6 +29,7 @@ export const mutations = {
     }
 }
 
+// 异步请求
 export const actions={
   // 登录请求
   login(store,data){
@@ -63,6 +64,25 @@ export const actions={
     }).then(res =>{
       // console.log(res)
      store.commit('registerData',res.data)
+    })
+  },
+
+
+  // 获取城市
+  querySearch(store,data){
+  return  this.$axios({
+      url: "/cities",
+      params: {
+        name: data
+      }
+    }).then(res => {
+      console.log(res)
+      const { data } = res.data;
+      const newData = data.map(v => {
+        v.value = v.name.replace("市", "");
+        return v;
+      });
+      return newData;
     })
   }
 }
