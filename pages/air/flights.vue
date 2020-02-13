@@ -78,7 +78,7 @@ export default {
     getData(newData){
       this.flightsAmount.flights = newData;
       this.flightsAmount.total = newData.length;
-      console.log(newData.length)
+      // console.log(newData.length)
       // console.log( this.flightsAmount.total)
     }
   },
