@@ -4,7 +4,7 @@
       <!-- 顶部过滤列表 -->
       <div class="flights-content">
         <!-- 过滤条件 -->
-        <div></div>
+       <FlightsFilters></FlightsFilters>
 
         <!-- 航班头部布局 -->
         <FlightsListHead></FlightsListHead>
@@ -36,15 +36,17 @@
 <script>
 import FlightsListHead from "@/components/air/flightsListHead";
 import FlightsLtem from "@/components/air/flightsItem";
+import FlightsFilters from "@/components/air/flightsFilters"
 
 export default {
   components: {
     FlightsListHead,
-    FlightsLtem
+    FlightsLtem,
+    FlightsFilters
   },
   data() {
     return {
-      //  手机后台返回的总数据
+      //服务器台返回的总数据
       flightsAmount: {},
       // 表示第几页
       pageIndex : 1,
