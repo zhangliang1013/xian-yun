@@ -84,7 +84,7 @@ export default {
     methods: {
         // 选择机场时候触发
         handleAirport(value){
-            
+            // console.log(value)
         },
 
         // 选择出发时间时候触发
@@ -94,6 +94,15 @@ export default {
 
          // 选择航空公司时候触发
         handleCompany(value){
+            // console.log(value)
+            if(!this.data.flights){
+                return;
+            }
+
+            const newData = this.data.flights.filter(v=>{
+                return v.airline_name === value;
+            })
+              this.$emit('getData',newData)
             
         },
 

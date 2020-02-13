@@ -4,7 +4,7 @@
       <!-- 顶部过滤列表 -->
       <div class="flights-content">
         <!-- 过滤条件 -->
-       <FlightsFilters :data='copyFlightsList'></FlightsFilters>
+       <FlightsFilters :data='copyFlightsList' @getData='getData'></FlightsFilters>
 
         <!-- 航班头部布局 -->
         <FlightsListHead></FlightsListHead>
@@ -47,7 +47,10 @@ export default {
   data() {
     return {
       //服务器台返回的总数据
-      flightsAmount: {},
+      flightsAmount: {
+        flights :[],
+        total : 1
+      },
       // 储存拷贝返回的数据
       copyFlightsList : {
             info : {},
@@ -70,6 +73,13 @@ export default {
     handleCurrentChange(val){
       //  console.log(val)
       this.pageIndex = val;
+    },
+    // 获取筛选的机票列表
+    getData(newData){
+      this.flightsAmount.flights = newData;
+      this.flightsAmount.total = newData.length;
+      console.log(newData.length)
+      // console.log( this.flightsAmount.total)
     }
   },
   computed : {
