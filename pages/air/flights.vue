@@ -4,7 +4,7 @@
       <!-- 顶部过滤列表 -->
       <div class="flights-content">
         <!-- 过滤条件 -->
-       <FlightsFilters></FlightsFilters>
+       <FlightsFilters :data='copyFlightsList'></FlightsFilters>
 
         <!-- 航班头部布局 -->
         <FlightsListHead></FlightsListHead>
@@ -48,6 +48,12 @@ export default {
     return {
       //服务器台返回的总数据
       flightsAmount: {},
+      // 储存拷贝返回的数据
+      copyFlightsList : {
+            info : {},
+            flights :[],
+            options : {}
+      },
       // 表示第几页
       pageIndex : 1,
       // 每页显示多少条
@@ -87,6 +93,7 @@ export default {
       // console.log(res)
       const { data } = res;
       this.flightsAmount = data;
+      this.copyFlightsList = {...data};
       console.log(this.flightsAmount);
     });
   }
