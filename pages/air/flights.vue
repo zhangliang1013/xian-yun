@@ -26,9 +26,7 @@
       
 
       <!-- 侧边栏 -->
-      <div class="aside">
-        <!-- 侧边栏组件 -->
-      </div>
+       <FlightsAside></FlightsAside>
     </el-row>
   </section>
 </template>
@@ -36,13 +34,15 @@
 <script>
 import FlightsListHead from "@/components/air/flightsListHead";
 import FlightsLtem from "@/components/air/flightsItem";
-import FlightsFilters from "@/components/air/flightsFilters"
+import FlightsFilters from "@/components/air/flightsFilters";
+import FlightsAside from "@/components/air/flightsAside";
 
 export default {
   components: {
     FlightsListHead,
     FlightsLtem,
-    FlightsFilters
+    FlightsFilters,
+    FlightsAside
   },
   data() {
     return {
