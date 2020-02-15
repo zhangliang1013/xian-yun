@@ -104,7 +104,7 @@ export default {
       const { data } = res;
       this.flightsAmount = data;
       this.copyFlightsList = {...data};
-      console.log(this.flightsAmount);
+      // console.log(this.flightsAmount);
     });
   }
 };

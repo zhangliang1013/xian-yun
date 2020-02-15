@@ -243,8 +243,8 @@ export default {
         this.form.destCity = departCity; 
         this.form.destCode = departCode;
 
-        console.log(123)
-        console.log(this.form)
+        // console.log(123)
+        // console.log(this.form)
     },
 
     // 提交表单是触发
@@ -263,6 +263,10 @@ export default {
             return;
         }
         
+        
+        this.$store.commit('air/getAirList',this.form)
+        // console.log(this.form)
+
         this.$message.success('机票搜索成功！')
         this.$router.push({
             path : '/air/flights',
