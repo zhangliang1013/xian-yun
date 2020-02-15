@@ -42,7 +42,8 @@
                         <el-col :span="3" class="choose-button">
                             <el-button 
                             type="warning" 
-                            size="mini">
+                            size="mini"
+                            @click='handleAirClick(value)'>
                             选定
                             </el-button>
                             <p>剩余：{{value.discount}}</p>
@@ -97,6 +98,22 @@ export default {
         const sec =   TimeSpanNum % 60;
 
         return `${hour}时${sec}分`;
+        }
+    },
+    methods : {
+        // 点击选定的函数
+        handleAirClick(item){
+        //console.log(item)
+        // console.log(this.data)
+        //  跳转到订单页
+         this.$router.push({
+             path : '/air/order',
+             query : {
+                 id : this.data.id,
+                 seat_xid : item.seat_xid
+             }
+         })
+         this.$message.success('请输入订单信息')
         }
     }
 }
