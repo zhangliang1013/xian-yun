@@ -80,7 +80,22 @@ export default {
       this.flightsAmount.total = newData.length;
       // console.log(newData.length)
       // console.log( this.flightsAmount.total)
+    },
+    // 封装获取机票列表的函数
+    getAirList(){
+       // 获取航班信息
+    this.$axios({
+      url: "/airs",
+      params: this.$route.query
+    }).then(res => {
+      // console.log(res)
+      const { data } = res;
+      this.flightsAmount = data;
+      this.copyFlightsList = {...data};
+      // console.log(this.flightsAmount);
+    });
     }
+
   },
   computed : {
      dataList(){
@@ -94,18 +109,21 @@ export default {
       return arr ;
      }
   },
+  // 监听路由参数变化执行
+  // watch : {
+  //   $route(){
+  //     this.pageIndex = 1;
+  //     this.getAirList();
+  //   }
+  // },
+  // 组件内的守卫方法
+   beforeRouteUpdate (to, from, next) {
+     this.pageIndex = 1;
+      this.getAirList();
+      next();
+   },
   mounted() {
-    // 获取航班信息
-    this.$axios({
-      url: "/airs",
-      params: this.$route.query
-    }).then(res => {
-      // console.log(res)
-      const { data } = res;
-      this.flightsAmount = data;
-      this.copyFlightsList = {...data};
-      // console.log(this.flightsAmount);
-    });
+   this.getAirList();
   }
 };
 </script>
