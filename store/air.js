@@ -8,7 +8,11 @@ export const state = ()=>{
         //     destCode: "",
         //     departDate: "2019-10-20"
         //    }
-       ]
+       ],
+    //储存订单信息 
+    orderInfo : {
+        seat_infos : {}
+    }
    }
 }
 
@@ -23,5 +27,10 @@ export const mutations = {
             state.infoData.length = 5;
         }
         // console.log(state.infoData);
+    },
+    // 获取订单信息
+    getOrderInfo(state,data){
+        state.orderInfo = data;
+        console.log(data)
     }
 }

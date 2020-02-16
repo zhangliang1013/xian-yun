@@ -110,6 +110,7 @@ export default {
     }).then(res => {
         //  console.log(res)
         this.infoData = res.data;
+        this.$store.commit('air/getOrderInfo',this.infoData);
     })
     },
     methods: {

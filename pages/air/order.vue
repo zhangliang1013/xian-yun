@@ -5,7 +5,7 @@
             <OrderForm></OrderForm>
 
             <!-- 侧边栏 -->
-           <OrderAside></OrderAside>
+           <OrderAside :data='$store.state.air.orderInfo'></OrderAside>
         </el-row>
     </div>
 </template>
