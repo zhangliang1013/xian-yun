@@ -118,9 +118,9 @@ export default {
   // },
   // 组件内的守卫方法
    beforeRouteUpdate (to, from, next) {
+     next();
      this.pageIndex = 1;
-      this.getAirList();
-      next();
+     this.getAirList();
    },
   mounted() {
    this.getAirList();

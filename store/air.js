@@ -14,7 +14,12 @@ export const state = ()=>{
 
 export const mutations = {
     getAirList(state,data){
-        state.infoData.push(data);
-        console.log(state.infoData);
+        state.infoData.unshift(data);
+        // 控制历史查询只显示5条记录
+        // 方法1
+        //  state.infoData = state.infoData.slice(0,5);
+        // 方法2
+        state.infoData.length = 5;
+        // console.log(state.infoData);
     }
 }
