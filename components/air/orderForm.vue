@@ -73,6 +73,7 @@
                 <el-button type="warning" class="submit" @click="handleSubmit">提交订单</el-button>
             </div>
         </div>
+        <p>{{computational}}</p>
     </div>
 </template>
 
@@ -99,6 +100,25 @@ export default {
         infoData : {}
         }
     },
+    computed: {
+    //计算机票总价
+      computational(){
+          var price = 0;
+          if(!this.infoData.seat_infos) return;
+          // 判断保险费用
+          this.infoData.insurances.forEach(v=>{
+              if(this.form.insurances.indexOf(v.id) > -1 ){
+                    price += v.price;
+              }
+          })
+        //  加上动态机票费和燃油费
+          var allPrice = (price + this.infoData.seat_infos.settle_price + this.infoData.airport_tax_audlet) * this.form.users.length;
+
+          this.$store.commit('air/getAllPrice',allPrice)
+
+        return '';
+      }
+    },
     mounted(){
     //获取选定机票的信息
     const {id , seat_xid} = this.$route.query;
@@ -110,6 +130,7 @@ export default {
     }).then(res => {
         //  console.log(res)
         this.infoData = res.data;
+        console.log(this.infoData)
         this.$store.commit('air/getOrderInfo',this.infoData);
     })
     },
