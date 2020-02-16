@@ -66,7 +66,9 @@
 export default {
     props : {
          data : Object,
-         default : {}
+         default : {
+             info: {}
+         }
     },
     data(){
         return {

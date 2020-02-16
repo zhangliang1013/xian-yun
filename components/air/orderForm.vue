@@ -43,7 +43,7 @@
             <div>
                 <div class="insurance-item" v-for="(item,index) in infoData.insurances" :key="index">
                     <el-checkbox 
-                    :label="`${item.type}：￥${item.price}/份×1  最高赔付${item.compensation}`" 
+                    :label="`${item.type}：￥${item.price}/份×${form.users.length}  最高赔付${item.compensation}`" 
                     border @change="handleInsurances(item)">
                     </el-checkbox> 
                 </div>

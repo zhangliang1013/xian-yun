@@ -55,8 +55,9 @@ export default {
             // 登录成功的提示
            this.$message.success('登录成功！');
         // 登录成功跳转到主页
-         this.$router.push('/')
-          //  this.$router.replace("/")
+        //  this.$router.push('/')
+          // this.$router.replace( this.$route.query || "/");
+          this.$router.replace(this.$route.query.returnUrl || "/")
         })
         } else {
           this.$message.error("温馨提示！登录出错了哦");

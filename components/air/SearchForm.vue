@@ -273,8 +273,7 @@ export default {
             query : this.form
         })
     }
-  },
-  mounted() {}
+  }
 };
 </script>
 

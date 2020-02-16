@@ -76,7 +76,7 @@ export const actions={
         name: data
       }
     }).then(res => {
-      console.log(res)
+      // console.log(res)
       const { data } = res.data;
       const newData = data.map(v => {
         v.value = v.name.replace("市", "");

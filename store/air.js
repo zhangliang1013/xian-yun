@@ -2,11 +2,11 @@ export const state = ()=>{
    return {
        infoData : [
         //    {
-        //     departCity: "12",
+        //     departCity: "广州",
         //     departCode: "",
-        //     destCity: "123",
+        //     destCity: "上海",
         //     destCode: "",
-        //     departDate: ""
+        //     departDate: "2019-10-20"
         //    }
        ]
    }
@@ -19,7 +19,9 @@ export const mutations = {
         // 方法1
         //  state.infoData = state.infoData.slice(0,5);
         // 方法2
-        state.infoData.length = 5;
+        if(state.infoData.length > 5){
+            state.infoData.length = 5;
+        }
         // console.log(state.infoData);
     }
 }
