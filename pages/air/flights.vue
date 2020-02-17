@@ -84,12 +84,12 @@ export default {
     // 封装获取机票列表的函数
     getAirList(){
        // 获取航班信息
-       console.log(this.$route.query)
+      //  console.log(this.$route.query)
     this.$axios({
       url: "/airs",
       params: this.$route.query
     }).then(res => {
-       console.log(res)
+      //  console.log(res)
       const { data } = res;
       this.flightsAmount = data;
       this.copyFlightsList = {...data};

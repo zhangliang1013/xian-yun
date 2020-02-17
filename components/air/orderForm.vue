@@ -130,7 +130,7 @@ export default {
     }).then(res => {
         //  console.log(res)
         this.infoData = res.data;
-        console.log(this.infoData)
+        // console.log(this.infoData)
         this.$store.commit('air/getOrderInfo',this.infoData);
     })
     },
@@ -235,12 +235,17 @@ export default {
                Authorization: `Bearer ${this.$store.state.user.userInfo.token || 'NO TOKEN'}`
                }
             }).then(res =>{
-                // console.log(res)
+                //   console.log(res.data.data.id)
                 this.$message.success(res.data.message);
                 // 跳转到付款页面
-                this.$router.push({
-                    path : '/air/pay'
-                })
+                setTimeout( () =>{
+                   this.$router.push({
+                    path : '/air/pay',
+                    query : {
+                        id : res.data.data.id
+                    }
+                }) 
+                },3000)
             })
         
         }
